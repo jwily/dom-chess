@@ -3,22 +3,11 @@ import { bPieces, wPieces } from "./game-logic/data.js"
 
 const allSquares = [];
 
-const virtualBoard = [
-  ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],
-  ['bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP'],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  ['wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP'],
-  ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR']
-];
-
 window.addEventListener("DOMContentLoaded", e => {
 
   buildBoard();
-  console.log(allSquares);
   placePieces();
+  console.log(allSquares);
 
 });
 
@@ -42,7 +31,6 @@ const buildBoard = () => {
       const square = document.createElement('div');
 
       addHoverEffect(square);
-      addSelect(square);
 
       if (i % 2 !== 0) {
         square.classList.add(j % 2 !== 0 ? 'square-w' : 'square-b')
@@ -64,30 +52,36 @@ const addHoverEffect = (square) => {
 
   square.addEventListener('mouseenter', e => {
     e.target.classList.add('hover');
-    // e.target.innerText = e.target.id;
   })
 
   square.addEventListener('mouseleave', e => {
     e.target.classList.remove('hover');
-    // e.target.innerText = null;
-  })
-}
-
-const addSelect = (square) => {
-
-  square.addEventListener('click', e => {
-    console.log(e.target.id, ANtoXY(e.target.id))
   })
 }
 
 const placePieces = () => {
 
-  for (let data of Object.values(bPieces)) {
+  const createPieces = (data) => {
 
-    const piece = document.createElement('img');
+    const positions = data.start.map(pos => ANtoXY(pos));
 
-    for (let pos of data.start) {
+    for (let [row, col] of positions) {
 
+      const piece = document.createElement('img');
+      piece.src = `images/${data.img}`;
+      piece.alt = `black ${data.name.toLowerCase()}`
+      piece.classList.add('piece');
+
+      const square = allSquares[row][col];
+      square.appendChild(piece);
     }
+  }
+
+  for (let data of Object.values(bPieces)) {
+    createPieces(data);
+  }
+
+  for (let data of Object.values(wPieces)) {
+    createPieces(data);
   }
 }
