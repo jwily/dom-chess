@@ -3,6 +3,17 @@ import { bPieces, wPieces } from "./game-logic/data.js"
 
 const allSquares = [];
 
+const virtualBoard = [
+  ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR'],
+];
+
 window.addEventListener("DOMContentLoaded", e => {
 
   buildBoard();
