@@ -32,13 +32,14 @@ const buildBoard = () => {
 
       addHoverEffect(square);
 
+      square.classList.add('square');
+
       if (i % 2 !== 0) {
         square.classList.add(j % 2 !== 0 ? 'square-w' : 'square-b')
       }
 
       else square.classList.add(j % 2 !== 0 ? 'square-b' : 'square-w')
 
-      square.classList.add('square');
       square.id = col + i
       row.appendChild(square);
       virtualRow.push(square);
@@ -61,7 +62,7 @@ const addHoverEffect = (square) => {
 
 const placePieces = () => {
 
-  const createPieces = (data) => {
+  const createPieces = (data, color) => {
 
     const positions = data.start.map(pos => ANtoXY(pos));
 
@@ -69,8 +70,9 @@ const placePieces = () => {
 
       const piece = document.createElement('img');
       piece.src = `images/${data.img}`;
-      piece.alt = `black ${data.name.toLowerCase()}`
+      piece.alt = `${color} ${data.name.toLowerCase()}`
       piece.classList.add('piece');
+      piece.classList.add(`piece-${color[0]}`);
 
       const square = allSquares[row][col];
       square.appendChild(piece);
@@ -78,10 +80,10 @@ const placePieces = () => {
   }
 
   for (let data of Object.values(bPieces)) {
-    createPieces(data);
+    createPieces(data, 'black');
   }
 
   for (let data of Object.values(wPieces)) {
-    createPieces(data);
+    createPieces(data, 'white');
   }
 }
