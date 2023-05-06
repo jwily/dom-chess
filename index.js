@@ -70,9 +70,17 @@ const placePieces = () => {
 
       const piece = document.createElement('img');
       piece.src = `images/${data.img}`;
-      piece.alt = `${color} ${data.name.toLowerCase()}`
+      piece.alt = `${color} ${data.name.toLowerCase()}`;
       piece.classList.add('piece');
       piece.classList.add(`piece-${color[0]}`);
+
+      if (data.name === 'Pawn') {
+        piece.classList.add('unmoved');
+      }
+
+      piece.addEventListener('click', e => {
+        console.log(e.target.alt);
+      })
 
       const square = allSquares[row][col];
       square.appendChild(piece);
