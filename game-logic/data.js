@@ -1,3 +1,5 @@
+import { knightMoves } from "./moves.js";
+
 const bPieces = {
   K: {
     name: 'King',
@@ -17,7 +19,8 @@ const bPieces = {
   N: {
     name: 'Knight',
     start: ['b8', 'g8'],
-    img: 'b_knight_svg_NoShadow.svg'
+    img: 'b_knight_svg_NoShadow.svg',
+    moves: knightMoves
   },
   R: {
     name: 'Rook',
@@ -50,7 +53,8 @@ const wPieces = {
   N: {
     name: 'Knight',
     start: ['b1', 'g1'],
-    img: 'w_knight_svg_NoShadow.svg'
+    img: 'w_knight_svg_NoShadow.svg',
+    moves: knightMoves
   },
   R: {
     name: 'Rook',
